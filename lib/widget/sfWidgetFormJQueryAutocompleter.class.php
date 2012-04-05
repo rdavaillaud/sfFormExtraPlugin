@@ -21,7 +21,7 @@
  * @package    symfony
  * @subpackage widget
  * @author     Fabien Potencier <fabien.potencier@symfony-project.com>
- * @version    SVN: $Id: sfWidgetFormJQueryAutocompleter.class.php 15839 2009-02-27 05:40:57Z fabien $
+ * @version    SVN: $Id: sfWidgetFormJQueryAutocompleter.class.php 31062 2010-10-06 13:54:38Z fabien $
  */
 class sfWidgetFormJQueryAutocompleter extends sfWidgetFormInput
 {
@@ -81,7 +81,12 @@ class sfWidgetFormJQueryAutocompleter extends sfWidgetFormInput
         return parsed;
       }
     }, %s))
-    .result(function(event, data) { jQuery("#%s").val(data[1]); });
+    .result(function(event, data) { jQuery("#%s").val(data[1]); })
+    .keyup(function() {
+      if(this.value.length == 0) {
+        $('#%s').val('');
+      }
+    });
   });
 </script>
 EOF
@@ -89,6 +94,7 @@ EOF
       $this->generateId('autocomplete_'.$name),
       $this->getOption('url'),
       $this->getOption('config'),
+      $this->generateId($name),
       $this->generateId($name)
     );
   }

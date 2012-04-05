@@ -38,7 +38,7 @@ try
 catch (sfValidatorError $e)
 {
   $t->pass('->clean() throws a sfValidatorError when the submitted value is invalid');
-  $t->is($e->getCode(), 'invalid', '->clean() throws an "invalid" error');
+  $t->is($e->getCode(), 'forbidden', '->clean() throws an "forbidden" error');
 }
 
 try

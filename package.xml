@@ -5,7 +5,7 @@
  <summary>Validators, Widgets, and Forms.</summary>
  <description>Validators, Widgets, and Forms.</description>
  <lead>
-  <name>Fabien POTENCIER</name>
+  <name>Fabien Potencier</name>
   <user>fabpot</user>
   <email>fabien.potencier@symfony-project.com</email>
   <active>yes</active>
@@ -28,9 +28,9 @@
   <email>hugo.hamon@sensio.com</email>
   <active>yes</active>
  </developer>
- <date>2009-11-30</date>
+ <date>2010-08-25</date>
  <version>
-   <release>1.0.12</release>
+   <release>1.1.3</release>
    <api>1.0.0</api>
  </version>
  <stability>
@@ -59,9 +59,11 @@
          <file role="data" name="sfValidatorBlacklist.class.php" />
          <file role="data" name="sfValidatorReCaptcha.class.php" />
          <file role="data" name="sfValidatorSchemaTimeInterval.class.php" />
+         <file role="data" name="sfValidatorDefault.class.php" />
        </dir>
        <dir name="widget">
          <file role="data" name="sfWidgetFormDoctrineChoiceGrouped.class.php" />
+         <file role="data" name="sfWidgetFormDoctrineJQueryAutocompleter.class.php" />
          <file role="data" name="sfWidgetFormJQueryAutocompleter.class.php" />
          <file role="data" name="sfWidgetFormJQueryDate.class.php" />
          <file role="data" name="sfWidgetFormPropelChoiceGrouped.class.php" />
@@ -82,6 +84,7 @@
          <file role="data" name="sfValidatorReCaptchaTest.php" />
          <file role="data" name="sfValidatorBlacklistTest.php" />
          <file role="data" name="sfValidatorSchemaTimeIntervalTest.php" />
+         <file role="data" name="sfValidatorDefaultTest.php" />
        </dir>
        <dir name="widget">
          <file role="data" name="sfWidgetFormReCaptchaTest.php" />
@@ -108,7 +111,7 @@
  <dependencies>
   <required>
    <php>
-    <min>5.1.3</min>
+    <min>5.2.4</min>
    </php>
    <pearinstaller>
     <min>1.4.1</min>
@@ -116,9 +119,9 @@
    <package>
     <name>symfony</name>
     <channel>pear.symfony-project.com</channel>
-    <min>1.1.0</min>
-    <max>1.3.0</max>
-    <exclude>1.3.0</exclude>
+    <min>1.3.0</min>
+    <max>2.0.0</max>
+    <exclude>2.0.0</exclude>
    </package>
   </required>
  </dependencies>
@@ -127,9 +130,25 @@
  </phprelease>
 
  <changelog>
+     <release>
+       <version>
+         <release>1.1.4</release>
+         <api>1.0.0</api>
+       </version>
+       <stability>
+         <release>stable</release>
+         <api>stable</api>
+       </stability>
+       <license uri="http://www.symfony-project.com/license">MIT license</license>
+       <date>201X-XX-XX</date>
+       <license>MIT</license>
+       <notes>
+         * Fabien: fixed recaptcha URLs (closes #9788)
+       </notes>
+     </release>
    <release>
      <version>
-       <release>1.0.13</release>
+       <release>1.1.3</release>
        <api>1.0.0</api>
      </version>
      <stability>
@@ -137,14 +156,40 @@
        <api>stable</api>
      </stability>
      <license uri="http://www.symfony-project.com/license">MIT license</license>
-     <date>someday</date>
+     <date>2010-08-25</date>
      <license>MIT</license>
      <notes>
+       * xavier: allowed unassociated list to be left of the associated one (#7780)
+       * Fabien: added culture and theme options for sfWidgetFormReCaptcha (#8509)
+       * Fabien: updated the autocomplete JavaScript to the latest version
+       * Fabien: fixed sfWidgetFormJQueryDate doesn't refresh "disabled" after the date was chosen from calendar (#8817)
+       * Xavier: fixed sfWidgetFormJQueryDate doesn't restrict values on page load (#7792)
+       * Fabien: fixed JS function names when the widget name contains - (#8836)
+       * Fabien: added support for sfWidgetFormDateTime in sfWidgetFormJQueryDate (#8950)
      </notes>
    </release>
    <release>
      <version>
-       <release>1.0.12</release>
+       <release>1.1.2</release>
+       <api>1.0.0</api>
+     </version>
+     <stability>
+       <release>stable</release>
+       <api>stable</api>
+     </stability>
+     <license uri="http://www.symfony-project.com/license">MIT license</license>
+     <date>2010-08-03</date>
+     <license>MIT</license>
+     <notes>
+       * Kris.Wallsmith: added sfValidatorDefault, which returns a default value rather than throw an error
+       * Kris.Wallsmith: fixed blacklist validator test
+       * FabianLange: fixed incorrect octal parsing of dates in javascript (#7743)
+       * Kris.Wallsmith: fixed reading of can_be_empty option in sfWidgetFormJQueryDate (#8723)
+     </notes>
+   </release>
+   <release>
+     <version>
+       <release>1.1.1</release>
        <api>1.0.0</api>
      </version>
      <stability>
@@ -155,13 +200,14 @@
      <date>2009-11-30</date>
      <license>MIT</license>
      <notes>
-       * hugo.hamon: fixed typo in sfValidatorDoctrineNestedSetLevel validator (r18044)
-       * hugo.hamon: added new sfValidatorDoctrineNestedSetLevel validator to restrict the max level of a nested set objects tree (r18043)
+       * fabien: added a date_widget option to sfWidgetFormJQueryDate (#5382)
+       * fabien: changed the sfFormLanguage to take the current user culture into account (#6752)
+       * fabien: added sfWidgetFormDoctrineJQueryAutocompleter (#5118, #4943)
      </notes>
    </release>
    <release>
      <version>
-       <release>1.0.11</release>
+       <release>1.1.0</release>
        <api>1.0.0</api>
      </version>
      <stability>
@@ -169,135 +215,10 @@
        <api>stable</api>
      </stability>
      <license uri="http://www.symfony-project.com/license">MIT license</license>
-     <date>2009-04-10</date>
+     <date>2009-11-30</date>
      <license>MIT</license>
      <notes>
-       * fabien: removed the need to pass a class for sfWidgetFormTextareaTinyMCE (#4918, #5546, #4952)
-       * Kris.Wallsmith: added sfWidgetFormSelectUSState
-       * Kris.Wallsmith: added sfWidgetFormPropelChoiceGrouped
-       * Kris.Wallsmith: added sfWidgetFormDoctrineChoiceGrouped
-     </notes>
-   </release>
-   <release>
-     <version>
-       <release>1.0.10</release>
-       <api>1.0.0</api>
-     </version>
-     <stability>
-       <release>stable</release>
-       <api>stable</api>
-     </stability>
-     <license uri="http://www.symfony-project.com/license">MIT license</license>
-     <date>2009-03-12</date>
-     <license>MIT</license>
-     <notes>
-       * fabien: fixed typo
-     </notes>
-   </release>
-   <release>
-     <version>
-       <release>1.0.9</release>
-       <api>1.0.0</api>
-     </version>
-     <stability>
-       <release>stable</release>
-       <api>stable</api>
-     </stability>
-     <license uri="http://www.symfony-project.com/license">MIT license</license>
-     <date>2009-02-27</date>
-     <license>MIT</license>
-     <notes>
-       * fabien: fixed typo
-     </notes>
-   </release>
-   <release>
-     <version>
-       <release>1.0.8</release>
-       <api>1.0.0</api>
-     </version>
-     <stability>
-       <release>stable</release>
-       <api>stable</api>
-     </stability>
-     <license uri="http://www.symfony-project.com/license">MIT license</license>
-     <date>2009-02-27</date>
-     <license>MIT</license>
-     <notes>
-       * fabien: forced date format returned by the date picker (based on a patch from xdade - #5619)
-       * fabien: added JS date selection validity check (based on a patch from h0nIg - #4693)
-       * fabien: fixed date picker on IE7 (#4751)
-       * fabian: fixed javascript function names (#5261)
-       * fabien: replaced $() with jQuery() (#4999)
-     </notes>
-   </release>
-   <release>
-     <version>
-       <release>1.0.7</release>
-       <api>1.0.0</api>
-     </version>
-     <stability>
-       <release>stable</release>
-       <api>stable</api>
-     </stability>
-     <license uri="http://www.symfony-project.com/license">MIT license</license>
-     <date>2009-01-11</date>
-     <license>MIT</license>
-     <notes>
-       * fixed sfFormExtraPlugin Autocomplete getStyleSheets returns incorrect files
-     </notes>
-   </release>
-   <release>
-     <version>
-       <release>1.0.5</release>
-       <api>1.0.0</api>
-     </version>
-     <stability>
-       <release>stable</release>
-       <api>stable</api>
-     </stability>
-     <license uri="http://www.symfony-project.com/license">MIT license</license>
-     <date>2008-11-01</date>
-     <license>MIT</license>
-     <notes>
-       * added getJavascripts() and getStylesheets() method to the widgets that need
-         some javascripts or stylesheets to work
-       * removed the need to add an "onsubmit" attribute to the form tag for the DoubleList widget
-     </notes>
-   </release>
-   <release>
-     <version>
-       <release>1.0.4</release>
-       <api>1.0.0</api>
-     </version>
-     <stability>
-       <release>stable</release>
-       <api>stable</api>
-     </stability>
-     <license uri="http://www.symfony-project.com/license">MIT license</license>
-     <date>2008-08-25</date>
-     <license>MIT</license>
-     <notes>
-       * Added sfWidgetFormJQueryDate widget
-       * Added sfWidgetFormPropelJQueryAutocompleter widget
-       * Added sfWidgetFormJQueryAutocompleter widget
-       * Added sfWidgetFormSelectDoubleList widget
-     </notes>
-   </release>
-   <release>
-     <version>
-       <release>1.0.2</release>
-       <api>1.0.0</api>
-     </version>
-     <stability>
-       <release>stable</release>
-       <api>stable</api>
-     </stability>
-     <license uri="http://www.symfony-project.com/license">MIT license</license>
-     <date>2008-08-25</date>
-     <license>MIT</license>
-     <notes>
-       * Added sfValidatorSchemaTimeInterval validator
-       * Added sfValidatorBlacklist validator
+       * fabien: made the plugin work for symfony 1.3/1.4
      </notes>
    </release>
  </changelog>

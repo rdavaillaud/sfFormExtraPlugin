@@ -67,7 +67,7 @@ class sfValidatorSchemaTimeInterval extends sfValidatorSchema
     // Validation error messages
     $this->addMessage('future_date', 'The date cannot be in the future');
     $this->addMessage('past_date', 'The date cannot be in the past');
-    $this->addMessage('too_short', 'The time interval between the two dates is too shortl');
+    $this->addMessage('too_short', 'The time interval between the two dates is too short');
     $this->addMessage('too_long', 'The time interval between the two dates is too long');
     $this->addMessage('start_not_prior', 'The start date must be prior to the end date');
 

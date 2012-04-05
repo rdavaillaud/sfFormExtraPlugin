@@ -31,7 +31,7 @@
  * @package    symfony
  * @subpackage widget
  * @author     Fabien Potencier <fabien.potencier@symfony-project.com>
- * @version    SVN: $Id: sfWidgetFormReCaptcha.class.php 7285 2008-02-03 09:50:35Z fabien $
+ * @version    SVN: $Id: sfWidgetFormReCaptcha.class.php 33124 2011-10-07 13:13:30Z fabien $
  */
 class sfWidgetFormReCaptcha extends sfWidgetForm
 {
@@ -44,6 +44,8 @@ class sfWidgetFormReCaptcha extends sfWidgetForm
    *  * use_ssl:        Whether to use SSL or not (false by default)
    *  * server_url:     The URL for the HTTP API
    *  * server_url_ssl: The URL for the HTTPS API (when use_ssl is true)
+   *  * theme:          The ReCaptcha theme
+   *  * culture:        The ReCaptcha language
    *
    * @see sfWidgetForm
    */
@@ -52,8 +54,10 @@ class sfWidgetFormReCaptcha extends sfWidgetForm
     $this->addRequiredOption('public_key');
 
     $this->addOption('use_ssl', false);
-    $this->addOption('server_url', 'http://api.recaptcha.net');
-    $this->addOption('server_url_ssl', 'https://api-secure.recaptcha.net');
+    $this->addOption('server_url', 'http://www.google.com/recaptcha/api');
+    $this->addOption('server_url_ssl', 'https://www.google.com/recaptcha/api');
+    $this->addOption('theme', 'clean');
+    $this->addOption('culture', 'en');
   }
 
   /**
@@ -63,15 +67,23 @@ class sfWidgetFormReCaptcha extends sfWidgetForm
   {
     $server = $this->getServerUrl();
     $key = $this->getOption('public_key');
+    $theme = $this->getOption('theme');
+    $culture = $this->getOption('culture');
 
     return sprintf('
+    <script type="text/javascript">
+    var RecaptchaOptions = {
+    theme : \'%s\',
+    lang : \'%s\'
+    };
+    </script>
     <script type="text/javascript" src="%s/challenge?k=%s"></script>
     <noscript>
       <iframe src="%s/noscript?k=%s" height="300" width="500" frameborder="0"></iframe><br />
       <textarea name="recaptcha_challenge_field" rows="3" cols="40"></textarea>
       <input type="hidden" name="recaptcha_response_field" value="manual_challenge" />
     </noscript>
-    ', $server, $key, $server, $key);
+    ', $theme, $culture, $server, $key, $server, $key);
   }
 
   protected function getServerUrl()
